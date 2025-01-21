@@ -2,13 +2,11 @@
     $(document).ready(function() {
         console.log("YTSHBlocker has started");
 
-        let canRemoveVideo = true;
-        let canRemoveBtn = true;
-
         // Функция для удаления видосов
         function removeVideo() {
             if (canRemoveVideo) {
                 $('.style-scope.ytd-rich-shelf-renderer').remove();
+                $('.ytd-reel-shelf-renderer').remove();
                 console.log("Videos deleted");
             }
         }

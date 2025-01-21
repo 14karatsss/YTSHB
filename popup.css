@@ -1,0 +1,43 @@
+/* popup.css */
+
+body {
+    background-color: #2c2c2c; /* Темный фон */
+    color: #ffffff; /* Цвет текста */
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.toggle {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 25px;
+    background: #444; /* Фоновый цвет тумблера */
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle:checked {
+    background: #66bb6a; /* Цвет при включенном состоянии */
+}
+
+.toggle::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle:checked::before {
+    transform: translateX(25px); /* Перемещение белого круга */
+}
