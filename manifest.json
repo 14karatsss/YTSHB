@@ -18,5 +18,12 @@
   ],
   "action": {
     "default_popup":"popup.html"
-  }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [{
+    "resources": ["popup.html", "popup.js"],
+    "matches": ["*://*/*"]
+  }]
 }
