@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "YTSHB",
-  "version": "1.0",
-  "description": "Скрывает YouTube Shorts на главной странице.",
+  "version": "1.1.778",
+  "description": "Скрывает YouTube Shorts",
   "permissions": ["storage", "activeTab", "scripting"],
   "content_scripts":[
     {
@@ -19,11 +19,11 @@
   "action": {
     "default_popup":"popup.html"
   },
+  "icons": {
+    "16": "icons/ytshblocker16.png",
+    "128": "icons/ytshblocker128-1.png"
+  },
   "background": {
     "service_worker": "background.js"
-  },
-  "web_accessible_resources": [{
-    "resources": ["popup.html", "popup.js"],
-    "matches": ["*://*/*"]
-  }]
+  }
 }
