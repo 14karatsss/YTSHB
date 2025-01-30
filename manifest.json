@@ -21,7 +21,7 @@
   },
   "icons": {
     "16": "icons/ytshblocker16.png",
-    "128": "icons/ytshblocker128-1.png"
+    "128": "icons/ytshblocker128.png"
   },
   "background": {
     "service_worker": "background.js"
