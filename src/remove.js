@@ -4,7 +4,6 @@
 
         // Функция для перенаправления
         function redirectToMain() {
-            // Проверяем, начинается ли текущий URL с /shorts
             if (window.location.href.startsWith('https://www.youtube.com/shorts/')) {
                 window.location.href = 'https://www.youtube.com/';
                 console.log("Redirecting to the main page of YouTube");
@@ -13,29 +12,29 @@
 
         // Функция для удаления видео
         function removeVideo() {
-            if (canRemoveVideo) {
-                $('.style-scope.ytd-rich-shelf-renderer').remove();
-                $('.ytd-reel-shelf-renderer').remove();
+            const videoElements = $('.style-scope.ytd-rich-shelf-renderer, .ytd-reel-shelf-renderer');
+            if (videoElements.length > 0) {
+                videoElements.remove();
                 console.log("Videos deleted");
             }
         }
 
         // Функция для удаления кнопки
         function removeBtn() {
-            if (canRemoveBtn) {
-                $('[title="Shorts"], [title="ショート"]').remove();
+            const btnElements = $('[title="Shorts"], [title="ショート"]');
+            if (btnElements.length > 0) {
+                btnElements.remove();
                 console.log("Button Shorts deleted");
             }
         }
 
         // Получаем состояния переключателей
         chrome.storage.sync.get(['removeVideo', 'removeBtn', 'removeRedirect'], (data) => {
-            canRemoveVideo = data.removeVideo || false;
-            canRemoveBtn = data.removeBtn || false;
+            const canRemoveVideo = data.removeVideo || false;
+            const canRemoveBtn = data.removeBtn || false;
 
-            // Проверка на перенаправление
             if (data.removeRedirect) {
-                redirectToMain(); // Вызов функции редиректа
+                redirectToMain();
             }
 
             // Инициализация MutationObserver
@@ -43,8 +42,8 @@
                 mutations.forEach(function(mutation) {
                     // Если добавлены новые элементы, вызываем функции удаления
                     if (mutation.addedNodes.length) {
-                        removeVideo();
-                        removeBtn();
+                        if (canRemoveVideo) removeVideo();
+                        if (canRemoveBtn) removeBtn();
                     }
                 });
             });
@@ -52,11 +51,15 @@
             // Настройки для observer
             const config = {
                 childList: true,
-                subtree: true // отслеживаем изменения во всех дочерних элементах
+                subtree: true
             };
 
             // Начинаем наблюдение за body
             observer.observe(document.body, config);
+
+            // Вызов функций удаления при загрузке страницы
+            if (canRemoveVideo) removeVideo();
+            if (canRemoveBtn) removeBtn();
         });
     });
 }(jQuery));
