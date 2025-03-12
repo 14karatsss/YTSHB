@@ -23,7 +23,7 @@
         // Функция для удаления кнопки
         function removeBtn() {
             if (canRemoveBtn) {
-                $('[title="Shorts"]').remove();
+                $('[title="Shorts"], [title="ショート"]').remove();
                 console.log("Button Shorts deleted");
             }
         }
